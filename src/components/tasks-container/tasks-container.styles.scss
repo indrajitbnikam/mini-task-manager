@@ -1,0 +1,14 @@
+.tasks-container {
+  width: 100%;
+  height: calc(100vh - 72px);
+  background-color: #eaeaea;
+  display: flex;
+  flex-direction: row;
+
+  overflow: auto;
+
+  .task-categories-container {
+    display: inline-flex;
+    padding-right: 20px;
+  }
+}
