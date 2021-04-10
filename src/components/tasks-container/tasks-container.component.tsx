@@ -18,13 +18,11 @@ const TasksContainer = ({ allTasks, allUsers, refreshTasks }: any) => {
   const [highTasks, setHighTasks] = useState<TaskType[]>([]);
 
   useEffect(() => {
-    if (allTasks.length === 0) return;
-
     const tempNormalTasks: TaskType[] = [];
     const tempMediumTasks: TaskType[] = [];
     const tempHighTasks: TaskType[] = [];
 
-    (allTasks as TaskType[]).forEach(task => {
+    (allTasks as TaskType[])?.forEach(task => {
       switch (task.priority) {
         case TaskPriority.Normal:
           tempNormalTasks.push(task);
@@ -50,7 +48,7 @@ const TasksContainer = ({ allTasks, allUsers, refreshTasks }: any) => {
 
   const sortTasksSortedByDate = (tasks: TaskType[]) => {
     tasks.sort((task1: TaskType, task2: TaskType) => {
-      return moment(moment(task2.due_date)).diff(moment(task1.due_date))
+      return moment(moment(task1.due_date)).diff(moment(task2.due_date))
     })
 
     return tasks;
@@ -69,7 +67,7 @@ const TasksContainer = ({ allTasks, allUsers, refreshTasks }: any) => {
           refreshTasks();
         }
       }
-      message.success({ content: 'moved!', key: 1, duration: 2 })
+      message.success({ content: 'moved!', key: 1, duration: 1 })
     }
   }
 

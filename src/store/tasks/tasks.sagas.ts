@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { AxiosResponse } from 'axios';
 import { all, call, put, takeLatest } from 'typed-redux-saga';
 import { getAllTasks } from '../../services/api.service';
@@ -11,11 +12,13 @@ export function* onRefreshTasks() {
 
 function* fetchAndSetAllTasks(action: TaskAction): Generator {
   try {
+    message.loading({content: 'Updating tasks...', key: 2});
     const response: AxiosResponse = yield* call<() => Promise<any>>(getAllTasks);
     if (response.status === 200) {
       const allTasks: TaskType[] = response.data.tasks;
       yield* put(setAllTasks(allTasks));
     }
+    message.success({ content: 'up-to date!', key: 2, duration: 1 });
   } catch (error) {
     console.error(error.message);
   }

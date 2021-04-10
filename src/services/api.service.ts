@@ -7,6 +7,7 @@ const requestConfig: AxiosRequestConfig = {
 }
 
 export const getAllUsers = () => {
+  console.log(process.env);
   return axios.get('https://devza.com/tests/tasks/listusers', requestConfig);
 };
 

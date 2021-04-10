@@ -41,7 +41,7 @@ const TaskPopUp = ({ form, users, initialData }: any) => {
         <Form.Item label="Assign to" name='assigned_to'>
           <Select size='large'>
             {
-              users.map((user: any) => (
+              users ? (users.map((user: any) => (
                 <Select.Option key={user.id} value={user.id}>
                   <div className='select-option'>
                     <span className='user-image'>
@@ -52,7 +52,7 @@ const TaskPopUp = ({ form, users, initialData }: any) => {
                     </span>
                   </div>
                 </Select.Option>
-              ))
+              ))) : null
             }
           </Select>
         </Form.Item>

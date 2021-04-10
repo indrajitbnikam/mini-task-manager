@@ -9,9 +9,9 @@ const TaskList = ({ taskPriority, tasks, users }: any) => {
     <div className='task-list'>
       <Droppable droppableId={taskPriority}>
         {
-          (provided) => (
+          (provided, snapshot) => (
             <div
-              className='task-cards-container'
+              className={`task-cards-container ${snapshot.isDraggingOver ? ' isDraggingOver' : ''}`}
               ref={provided.innerRef}
               {...provided.droppableProps}
             >

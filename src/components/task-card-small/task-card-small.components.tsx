@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { ArrowsAltOutlined } from '@ant-design/icons';
+import { ArrowsAltOutlined, ClockCircleOutlined, UserOutlined } from '@ant-design/icons';
 import './task-card-small.styles.scss';
 import { Button, Form, Modal, notification, Spin } from 'antd';
 import TaskPopUp from '../task-pop-up/task-pop-up.component';
@@ -8,6 +8,7 @@ import { deleteTask, updateTask } from '../../services/api.service';
 import { AllActionType } from '../../store/store.types';
 import { refreshTasks } from '../../store/tasks/tasks.actions';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 const TaskCardSmall = ({ task, index, users, refreshTasks }: any) => {
   const [popupVisible, setPopupVisible] = useState<boolean>(false);
@@ -76,8 +77,8 @@ const TaskCardSmall = ({ task, index, users, refreshTasks }: any) => {
     <>
       <Draggable draggableId={task.id} index={index}>
         {
-          (provided) => (
-            <div className='card-small'
+          (provided, snapshot) => (
+            <div className={`card-small ${snapshot.isDragging ? ' isDragging' :''}`}
               ref={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps}
@@ -87,14 +88,14 @@ const TaskCardSmall = ({ task, index, users, refreshTasks }: any) => {
               </div>
               <div className='card-info'>
                 <p className='due-date'>
-                  {task.due_date || ''}
+                  <ClockCircleOutlined style={{ marginRight: '2px' }}/> {moment(task.due_date).calendar() || ''}
                 </p>
                 <p className='user'>
-                  {task.assigned_name || ''}
+                  <UserOutlined style={{ marginRight: '2px' }} /> {task.assigned_name || ''}
                 </p>
               </div>
               <div className='menu'>
-                <Button shape="circle" icon={<ArrowsAltOutlined />} onClick={handleOpenTask} style={{opacity: '.5'}}></Button>
+                <Button shape="circle" icon={<ArrowsAltOutlined />} onClick={handleOpenTask} className='menu-button'></Button>
               </div>
             </div>
           )
