@@ -19,9 +19,9 @@ export const createTask = (taskData: any) => {
 };
 
 export const updateTask = (taskData: any) => {
-  return axios.post('https://devza.com/tests/tasks/list', taskData, requestConfig);
+  return axios.post('https://devza.com/tests/tasks/update', taskData, requestConfig);
 };
 
-export const deleteTask = (taskid: number) => {
-  return axios.post('https://devza.com/tests/tasks/list', { taskid }, requestConfig);
+export const deleteTask = (taskData: any) => {
+  return axios.post('https://devza.com/tests/tasks/delete', taskData, requestConfig);
 };

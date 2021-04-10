@@ -3,7 +3,6 @@ import { TaskAction, TasksActionTypes, TaskState, TaskType, UserType } from "./t
 const INITIAL_STATE: TaskState = {
   searchTerm: '',
   allTasks: [],
-  filteredTasks: [],
   allUsers: []
 }
 
@@ -19,12 +18,6 @@ const tasksReducer = (state: TaskState = INITIAL_STATE, action: TaskAction): Tas
       return {
         ...state,
         allTasks: action.payload as TaskType[]
-      }
-
-    case TasksActionTypes.SetFilteredTasks:
-      return {
-        ...state,
-        filteredTasks: action.payload as TaskType[]
       }
 
     case TasksActionTypes.SetAllUsers:

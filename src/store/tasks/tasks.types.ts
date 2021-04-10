@@ -14,7 +14,7 @@ export enum TaskPriority {
 
 export type TaskType = {
   message: string;
-  taskid?: string;
+  id?: string;
   due_date?: string;
   priority?: '1' | '2' | '3',
   assigned_to?: string
@@ -36,5 +36,4 @@ export interface TaskState {
   searchTerm: string;
   allUsers: UserType[];
   allTasks: TaskType[];
-  filteredTasks: TaskType[];
 }

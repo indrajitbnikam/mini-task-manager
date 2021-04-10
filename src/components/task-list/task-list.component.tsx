@@ -1,33 +1,32 @@
 import React from 'react';
-import { TaskPriority } from '../../store/tasks/tasks.types';
+import { Droppable } from 'react-beautiful-dnd';
+import { TaskType } from '../../store/tasks/tasks.types';
 import TaskCardSmall from '../task-card-small/task-card-small.components';
 import './task-list.styles.scss';
 
-const TaskList = () => {
-
-  const getListColor = (priority: TaskPriority = TaskPriority.High): string => {
-    switch (priority) {
-      case TaskPriority.Normal:
-        return '#75d616';
-
-      case TaskPriority.Mid:
-        return '#d6ba16';
-
-      case TaskPriority.High:
-        return '#d6531f';
-
-      default: return '#dadada';
-    }
-  }
-
+const TaskList = ({ taskPriority, tasks, users }: any) => {
   return (
     <div className='task-list'>
-      <div className='header' style={{ backgroundColor: getListColor()}}>
-        Header
-      </div>
-      <div className='task-cards-container'>
-        <TaskCardSmall />
-      </div>
+      <Droppable droppableId={taskPriority}>
+        {
+          (provided) => (
+            <div
+              className='task-cards-container'
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+            >
+              {
+                tasks.length > 0 ? (
+                  (tasks as TaskType[]).map((task, index) => (
+                    <TaskCardSmall key={task.id as string} task={task} index={index} users={users}/>
+                  ))
+                ) : null
+              }
+              {provided.placeholder}
+            </div>
+          )
+        }
+      </Droppable>
     </div>
   )
 }

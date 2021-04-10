@@ -4,4 +4,40 @@
   padding: 10px;
   border-radius: 6px;
   background-color: #eaeaea;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  .card-content {
+    font-style: italic;
+  }
+
+  .card-info {
+    display: flex;
+    justify-content: space-between;
+
+    .due-date {
+      color: #aaa;
+      margin: 0;
+    }
+
+    .user {
+      color: #aaa;
+      margin: 0;
+    }
+  }
+
+  .menu {
+    position: absolute;
+    display: none;
+    top: 5px;
+    right: 5px;
+  }
+
+  &:hover {
+    .menu {
+      display: inherit;
+    }
+  }
 }
